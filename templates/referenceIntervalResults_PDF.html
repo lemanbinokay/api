@@ -1,0 +1,9 @@
+{% block content %}
+    <h1>{% block title %} Reference Interval Estimation Results {% endblock %}</h1>
+    
+	<h3 class="">Selected Pathway: {{ selected_column }} </h3>
+	{% for item in refiner_result %}
+		<p> {{ item }} </p>
+	{% endfor %}
+<img src="/app/Rplots.png" width="50%">
+{% endblock %}

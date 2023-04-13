@@ -1,0 +1,22 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <h1>{% block title %} Genus {% endblock %}</h1>
+		
+	<table border="1" width="200000">
+	<tr>
+	<td width="100px">Action</td>
+	{% for genus_column in genus_columns %}
+		<td>{{ genus_column }}</td>
+	{% endfor %}
+	</tr>
+    {% for row in genus %}
+			<tr>
+			<td width="100px"><a href="{{ url_for('editGenus', id=row['id']) }}">Edit</a> - <a href="{{ url_for('genus_output_pdf', id=row['id']) }}" target="_blank">Pdf</a></td>
+			{% for item in row %}
+				<td>{{ item }}</td>
+			{% endfor %}
+			</tr>
+    {% endfor %}
+	</table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base_page2.html' %}
+
+{% block content %}
+    <h1 class="">{% block title %} Edit pathways ID = {{ pathways[0] }} {% endblock %}</h1>
+	<form action="{{ url_for('deletePathways', id=pathways['id']) }}" method="POST">
+		<tr>
+		<input class=" btn btn-outline-warning btn-lg p-lg-4 fw-bolder" type="button" value="Back" onclick="history.back()"><br><br>
+	</tr>
+        <input class="btn btn-outline-danger btn-lg p-lg-4 fw-bolder" type="submit" value="Delete Pathways"  onclick="return confirm('Are you sure you want to delete this post?')">
+    </form><br>
+	
+    <form method="post">
+		
+        <button class="btn btn-outline-info btn-lg p-lg-4 fw-bolder" type="submit">Update Pathways</button>
+	
+	<table>
+	<tr>
+		<td><label class="form-check-label "for={{ pathways_columns[0] }}>{{ pathways_columns[0] }}</label></td>
+        <td><input class="form-check-label "type="text" size=50 name={{ pathways_columns[0] }} placeholder={{ pathways_columns[0] }} value="{{ pathways[0] }}" disabled></input></td>
+	</tr>
+	{% for i in range(1,pathways_len) %}
+		<tr>
+			<td><label class="form-check-label " for={{ pathways_columns[loop.index] }}>{{ pathways_columns[loop.index] }}</label></td>
+			<td><input class="form-check-label " type="text" size="50" name={{ pathways_columns[loop.index] }} placeholder={{ pathways_columns[loop.index] }} value="{{ pathways[loop.index] }}"></input></td>
+		</tr>
+	{% endfor %}
+    </table>
+		
+
+        <button class="btn btn-outline-info btn-lg p-lg-4 fw-bolder" type="submit">Update Pathways</button>
+        <br><br><br>
+    </form>    
+{% endblock %}

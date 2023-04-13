@@ -1,0 +1,32 @@
+{% extends 'base_page2.html' %}
+
+{% block content %}
+    <h1 class="">{% block title %} Pathways {% endblock %}</h1>
+	<table>
+		<tr>
+			<td>
+				<table class="table">
+					<tr><td class="" height="80px">Action</td></tr>
+				{% for item in pathways_columns %}
+							<tr><td class="">{{ item }}</td></tr>
+				{% endfor %}
+				</table>
+			<td>
+				<table class="table">
+				{% for row in pathways %}
+						<tr>
+							<td height="80px" class="">
+								<a href="{{ url_for('editPathways', id=row['id']) }}" class="btn btn-warning btn-lg p-lg-12 text-uppercase fw-bolder">EDIT</a>
+								<a href="{{ url_for('pathways_output_pdf', id=row['id']) }}" class="btn btn-info btn-lg p-lg-12 text-uppercase fw-bolder" target="_blank">Pdf</a>
+							</td>
+						</tr>
+						
+						{% for item in row %}
+							<tr><td class="">{{ item }}</td></tr>
+						{% endfor %}
+				{% endfor %}
+				</table>
+			</td>
+		</tr>
+	</table>
+{% endblock %}

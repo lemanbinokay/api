@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <style>
+        div.a {
+          text-align: left;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Leman Binokay">
+    <meta name="description" content="API for Reference Interval Estimation ">
+    <meta name="keywords" content="restfulapi, microbiome,pathway abundace, genus, bacteria ">
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+    <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    
+    <title>{% block title %} {% endblock %} Restful API </title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='all.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom/extra.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='custom/extra.js') }}"></script>
+</head>
+
+<body id="page-body">
+    
+   <!-- navigation start-->
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNavbar">
+    <div class="container">        
+        <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#myNavbar"
+            aria-controls="myNavbar" aria-label="menüyü açma kapama butonu" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="myNavbar" aria-labelledby="myLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="myLabel">Menu</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Kapat">
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav ms-auto text-uppercase py-lg-2 te">
+                    <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link btn-close-canvas">Homepage</a></li>
+                    <li class="nav-item"><a href="{{ url_for('listPathways') }}" class="nav-link btn-close-canvas">Browse</a></li>
+                    <li class="nav-item"><a href="{{ url_for('createPathways') }}" class="nav-link btn-close-canvas">Upload New Data </a></li>
+                    <li class="nav-item"><a href="{{ url_for('referenceInterval') }}" class="nav-link btn-close-canvas">Estımate Reference Interval</a></li>
+                </ul>
+            </div>
+        </div>
+        <a href="{{ url_for('index') }}" class="navbar-brand text-uppercase" title="new design website link"></a>
+    </div>
+                {% if current_user.is_authenticated %}                    
+                        <div class="">{{ current_user.email }}
+                        &nbsp;&nbsp;<a href="/logout"   type="button" class="btn btn-danger btn-sm px-4 gap-3">Logout</a></div>
+				{% else %}
+					<div class=""><a href="/login"    type="button" class="btn btn-danger btn-sm px-4 gap-3">Login</a>&nbsp;&nbsp;<a href="/register" type="button" class="btn btn-secondary btn-sm px-4">Register</a></div>
+				{% endif %}
+</nav>
+<!-- navigation end-->
+
+    <!--header start-->    
+    <header class="backImage  text-center">
+		<div class="backImage-heading ">Restful API for Reference Interval Estimation</div>
+		<h4><b>Estimate the reference intervals of the functional abundance of the gut microbiota in various metabolic pathways.</b></h4>		
+        <div class="container">            
+            <a href="#documentation" class="btn btn-danger btn-lg p-lg-4 text-uppercase fw-bolder">Documentatıon</a>
+            <a href="#about" class="btn btn-danger btn-lg p-lg-4 text-uppercase fw-bolder">About API</a>
+        </div>
+    </header>
+    <!--header end-->
+        
+    <div class="content">
+        {% for message in get_flashed_messages() %}
+            <div class="alert">{{ message }}</div>
+        {% endfor %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- documentation start-->
+    <section id="documentation" class="mySection">
+
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="s-heading text-uppercase fw-bold">Documentatıon</h2>
+                <h3 class="s-subheading text-muted">We estimate the reference intervals of the functional abundance of the gut microbiota in various metabolic pathways. 
+                </h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="rounded-circle bg-danger  d-flex align-items-center justify-content-center m-auto"
+                        style="width: 8rem;height:8rem;" aria-hidden="true">
+                        <img class="img-fluid " src="{{ url_for('static', filename='img/metabolism.png') }}" alt=".." />
+                    </div>
+                    <h4 class="my-3 fw-bold">List Pathway Abundance</h4>
+                    <p class="text-muted">The microbial signatures and composition data obtained after DNA isolation and 16S rRNA sequencing of fecal samples from 58 healthy volunteers belonging to the Turkish population were mapped to metabolic pathways associated with the gut microbiota. In the List Pathway Abundance section, there are the functional abundances of the gut microbiota in various metabolic pathways for 58 healthy volunteers.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="rounded-circle bg-danger  d-flex align-items-center justify-content-center m-auto"
+                        style="width: 8rem;height:8rem;" aria-hidden="true">
+                        <img class="img-fluid " src="{{ url_for('static', filename='img/bacteria.png') }}" alt=".." />
+                    </div>
+                    <h4 class="my-3 fw-bold">Add Pathway Abundance </h4>
+                    <p class="text-muted"> In the Add Pathway Abundance section, data ( must be CSV file format) can be easily added. The data should be added after editing according to the sample file format.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="rounded-circle bg-danger  d-flex align-items-center justify-content-center m-auto"
+                        style="width: 8rem;height:8rem;" aria-hidden="true">
+                        <img src="{{ url_for('static', filename='img/reference.png') }}" alt=".." />
+                    </div>
+                    <h4 class="my-3 fw-bold">Reference Interval Estimation</h4>
+                    <p class="text-muted">The reference interval estimation can be made for each path, and the estimation of this intervals can be estimated again with each newly added data. After the reference interval estimation is made, it is determined whether the selected id is within the estimated intervals or not.</p>
+                </div>
+                <div class="a">
+                    <h4 class="my-3 fw-bold">API Endpoints</h4>
+                    <p class="text-muted">The guide for each endpoint is provided by the API, and the necessary documentation has been created to communicate with other applications.<br>
+                    <table>
+						<tr>
+							<td>http://127.0.0.1:5000/listPathways/</td><td width="20px"></td><td>List Pathway Abundance</td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/listPathways/json/ </td><td></td><td>Listed pathway abundances for selected id in JSON format </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/listPathwaysWithID/ </td><td></td><td>Listed pathway abundances for selected id in HTML format </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/pathways/pdf/{id} </td><td></td><td>Listed pathway abundances for selected id(1) in PDF format </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/editPathways/{id}/ </td><td></td><td>Listed pathway abundances for selected id for editing </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/createPathways/ </td><td></td><td>Add Pathway Abundance </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/referenceInterval/ </td><td></td><td>Reference Interval Estimation </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/referenceIntervalResults/ </td><td></td><td>Reference interval estimation results for selected id and selected pathway in HTML format </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/refiner/pdf/ </td><td></td><td>Reference interval estimation results for selected id and selected pathway in PDF format </td>							
+						</tr>
+						<tr>
+							<td>http://127.0.0.1:5000/referenceIntervalResults/json/ </td><td></td><td>Reference interval estimation results for selected id and selected pathway in JSON format </td>							
+						</tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- documantation end-->
+
+    <!--about us start-->
+    <section id="about" class="mySection">
+        <div class="container">
+            <div class="text-center mb-5 pb-3">
+                <h2 class="s-heading text-uppercase fw-bold">About API</h2>
+            </div>
+            <ul class="timeline">
+                <li class="t-inverted">
+                    <img class="t-image rounded-circle" src="{{ url_for('static', filename='img/about/2.jpg') }}" alt=".." />
+                <div class="t-panel">
+                    <div class="t-heading">
+                        <h4>Data </h4>
+                    </div>
+                    <div class="t-body">
+                        <p class="text-muted">16S sequencing data can be found in the metabolic pathways identified based on the marker gene sequences thanks to the Picrust2 tool in the ampliseq v2.3.1 workflow developed by nf-core using Nextflow v21.10.6 (The data table for Picrust 2 of the defined metabolic pathways is from the KEGG database, manually prepared and each individual After obtaining the functional abundances of the orthologous gene families related to the metabolic pathway (obtained with customized data), the population-specific reference intervals of each metabolic pathway were estimated using the refineR package in R environment.
+                        </p>
+                    </div>
+                </div>
+                </li>
+
+                <li>
+                        <img class="t-image rounded-circle" src="{{ url_for('static', filename='img/about/1.jpg') }}" alt=".." />
+                    <div class="t-panel">
+                        <div class="t-heading">
+                            <h4>Database</h4>
+                        </div>
+                        <div class="t-body">
+                            <p class="text-muted">An Application Programming Interface (Restful API) that can work on the internet has been developed in order to organize and facilitate users' access to the database by transferring the data of the intestinal microbiota and functional abundances in the metabolic pathways into the SQLITE3 database and configuring them in accordance with SQL queries.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="t-inverted">
+                        <img class="t-image rounded-circle" src="{{ url_for('static', filename='img/about/2.jpg') }}" alt=".." />
+                    <div class="t-panel">
+                        <div class="t-heading">
+                            <h4>Server </h4>
+                        </div>
+                        <div class="t-body">
+                            <p class="text-muted">The API was developed using the open source Python programming language and the Flask framework as software development platform. Any operating system can be selected as the server, and it is recommended to choose a Linux-based operating system.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                        <img class="t-image rounded-circle" src="{{ url_for('static', filename='img/about/3.jpg') }}" alt=".." />
+                    <div class="t-panel">
+                        <div class="t-heading">
+                            <h4>Installation</h4>
+                        </div>
+                        <div class="t-body">
+                            <p class="text-muted">It is aimed to be ready for immediate use without the need for compilation after the installation of the libraries required for the API to work and the configuration of the web server. If desired, Docker container can be preferred to run without installation. In this case, it will be sufficient to simply select the output port for Docker.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="t-inverted">
+                    <div class="t-image">
+                        <h4>Restful API for<br /> Reference Interval</h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!--about us end-->
+
+  <!-- footer start -->
+  <footer class="footer py-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start text-muted">
+                Copyright &copy; Restful API for Reference Interval Estimation 2022
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="#" class="link-info text-decoration-none me-3">Privacy Policy
+                </a>
+                <a href="#page-body" class="link-secondary text-decoration-none">Homepage</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer end -->
+
+

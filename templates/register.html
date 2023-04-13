@@ -1,0 +1,38 @@
+{% extends 'base_page2.html' %}
+
+{% block content %}
+    <h1 class="">{% block title %} Register {% endblock %}</h1>
+    {% if msg %}
+		<div class="">{{ msg | safe }}</div>
+	{% endif %}
+	<form action="{{ url_for('register') }}" method="POST">
+		<table>
+		<tr>
+			<td><div class="form-check">
+			<label class="form-label " for="username">Username </label>
+			</div></td><td width="20px"></td><td>
+			<input class="form-input" type="text" id="username" name="username" title="username">
+		</tr>
+		<tr>
+			<td><div class="form-check">
+			<label class="form-label " for="email">Email</label>
+			</div></td><td width="20px"></td><td>
+			<input class="form-input" type="email" id="email" name="email" title="email">
+		</tr>
+		<tr>
+			<td><div class="form-check">
+			<label class="form-label " for="password">Password</label>
+			</div></td><td width="20px"></td><td>
+			<input class="form-input" type="password" id="password" name="password" title="password">
+		</tr>
+		<tr>
+			<td><div class="form-check">
+			</div></td><td width="20px"></td><td>
+			<button class="btn btn-danger btn-lg p-lg-12 fw-bolder" type="submit">Register</button>
+		</tr>
+		</table>
+	</form>
+	<br><br><br>
+	
+{% endblock %}
+

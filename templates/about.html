@@ -1,0 +1,11 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <h1>{% block title %} About {% endblock %}</h1>
+    {% for post in posts %}
+        <div class='dev'>
+            <h2>{{ post['type'] }}</h2>
+            <p>{{ post['name'] }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

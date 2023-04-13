@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<title>PDF</title>
+<link rel="stylesheet" href="/app/static/all.css">
+<link rel="stylesheet" href="/app/static/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/app/static/custom/extra.css">
+</head>
+<body>
+<br>
+<h1>Pathway Abundance Result for ID={{ pathways["id"] }}</h1>
+<table class="table" border="1">
+	{% for pathways_column in pathways_columns %}
+		<tr><td>{{ pathways_column }}</td><td>{{ pathways[pathways_column] }}</td></tr>
+    {% endfor %}
+	
+	</table>
+
+</body></html>

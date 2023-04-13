@@ -1,0 +1,34 @@
+{% extends 'base_page2.html' %}
+
+{% block content %}
+    <h1 class="">{% block title %} Please choose file to upload a new data to the database. Before that you must download sample file and prepare the data you will upload in the proper format.
+{% endblock %}</h1>
+    <p class=""></p>
+	<form action="{{ url_for('uploadCSVforPathways') }}" method="post" enctype = "multipart/form-data">
+		<table>
+			<tr>
+				<td><input class="" type="file" name="csv_file" accept=".csv"></td>
+				<td width="10px">&nbsp;</td>
+				<td><button class="btn btn-danger btn-lg p-lg-12 fw-bolder" type="submit">Upload CSV</button></td>
+				<td width="10px">&nbsp;</td>
+				<td><a class="btn btn-info btn-lg p-lg-12 fw-bolder" href="{{ url_for('pathways_download_sample_csv', filename='sample.csv') }}">Sample File</a></td>
+			</tr>
+		</table>
+    </form>
+	<br><br><br>
+	
+	<hr>
+	<!--
+    <form action="{{ url_for('createPathways') }}" method="post">
+	<table class="table">
+	{% for i in range(1,pathways_columns_len) %}
+		<tr>
+			<td><label class="col-sm-2 col-form-label " for={{ pathways_columns[i] }}>{{ pathways_columns[i] }}</label></td>        
+			<td><input class="form-control" type="text" name={{ pathways_columns[i] }} placeholder={{ pathways_columns[i] }} title="{{ pathways_columns[i] }}" value="{{ request.form['{{ pathways_columns[i] }}'] or 0 }}"></input></td>
+		</tr>
+	{% endfor %}
+    </table>
+        <button class="btn btn-info btn-lg p-lg-4 text-uppercase fw-bolder" type="submit">Add Sample</button>
+    </form>
+    -->
+{% endblock %}

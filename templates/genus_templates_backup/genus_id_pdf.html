@@ -1,0 +1,24 @@
+<!doctype html>
+<title>PDF</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+</head>
+<body>
+<h1>Description</h1>
+<h2>Sub description</h2>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6wtcRd5m151x3YKL68hvlItPpvO6bD1bnlAX5VNoS&s" alt="" />
+
+<p>lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet, lorem ipsun dolor sit amet </p>
+
+<p>ID={{ genus["id"] }}</p>
+
+<table border="1">
+	
+	{% for genus_column in genus_columns %}
+		<tr><td>{{ genus_column }}</td><td>{{ genus[genus_column] }}</td><td width="20">&nbsp;</td><td>{{ genus_column }}</td><td>{{ genus[genus_column] }}</td></tr>
+    {% endfor %}
+	
+	</table>
+	
+<nav><a href="{{ url_for('genus_output_pdf', id=genus["id"]) }}">Download link for PDF</a></nav>

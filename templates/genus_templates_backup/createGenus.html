@@ -1,0 +1,27 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <h1>{% block title %} Add a New Genus {% endblock %}</h1>
+	<form action="{{ url_for('uploadCSVforGenus') }}" method="post" enctype = "multipart/form-data">
+		<input type="file" name="csv_file" accept=".csv">
+        <button type="submit">Upload CSV</button>
+		<br>
+		<a href="{{ url_for('genus_download_sample_csv', filename="sample.csv") }}">Download Sample File</a>
+    </form>
+	
+	<hr>
+	
+    <form action="{{ url_for('createGenus') }}" method="post">
+	<button type="submit">Add Sample</button>
+	<table>
+	{% for i in range(1,genus_columns_len) %}
+		<tr>
+			<td><label for={{ genus_columns[i] }}>{{ genus_columns[i] }}</label></td>        
+			<td><input type="text" name={{ genus_columns[i] }} placeholder={{ genus_columns[i] }} title="{{ genus_columns[i] }}" value="{{ request.form['{{ genus_columns[i] }}'] or 0 }}"></input></td>
+		</tr>
+	{% endfor %}
+    </table>
+
+        <button type="submit">Add Sample</button>
+    </form>
+{% endblock %}

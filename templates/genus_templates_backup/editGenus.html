@@ -1,0 +1,29 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <h1>{% block title %} Edit genus ID = {{ genus[0] }} {% endblock %}</h1>
+	<form action="{{ url_for('deleteGenus', id=genus['id']) }}" method="POST">
+        <input type="submit" value="Delete Genus"  onclick="return confirm('Are you sure you want to delete this post?')">
+    </form><br>
+	
+    <form method="post">
+	<input type="button" value="Back" onclick="history.back()"><br><br>
+        <button type="submit">Update Genus</button>
+	
+	<table>
+	<tr>
+		<td><label for={{ genus_columns[0] }}>{{ genus_columns[0] }}</label></td>
+        <td><input type="text" size=50 name={{ genus_columns[0] }} placeholder={{ genus_columns[0] }} value="{{ genus[0] }}" disabled></input></td>
+	</tr>
+	{% for i in range(1,genus_len) %}
+		<tr>
+			<td><label for={{ genus_columns[loop.index] }}>{{ genus_columns[loop.index] }}</label></td>
+			<td><input type="text" size="50" name={{ genus_columns[loop.index] }} placeholder={{ genus_columns[loop.index] }} value="{{ genus[loop.index] }}"></input></td>
+		</tr>
+	{% endfor %}
+    </table>
+		
+
+        <button type="submit">Update Genus</button>
+    </form>    
+{% endblock %}

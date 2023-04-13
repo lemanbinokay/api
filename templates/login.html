@@ -1,0 +1,45 @@
+{% extends 'base_page2.html' %}
+
+{% block content %}
+    <h1 class="">{% block title %} Login {% endblock %}</h1>
+{% if msg %}
+	<div class="">{{ msg | safe }}</div>
+{% endif %}
+	<form action="{{ url_for('login') }}" method="POST">
+		<table>
+		<tr>
+			<td><div class="form-check">
+			<label class="form-label " for="username">Username</label>
+			</div></td><td width="20px"></td><td>
+			<input class="form-input" type="text" id="username" name="username" title="Username">
+			</td>
+		</tr>
+		<tr>
+			<td><div class="form-check">
+			<label class="form-label " for="password">Password</label>
+			</div></td><td width="20px"></td><td>
+			<input class="form-input" type="password" id="password" name="password" title="password">
+			</td>
+		</tr>
+		<!--
+		<tr>
+			<td><div class="form-check">
+			<label class="form-check-label " for="remember">Remember me</label>
+			</div></td><td width="20px"></td><td>
+			<input class="form-check-input" type="checkbox" value="checked" id="remember" name="remember" title="Remember me">
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td><div class="form-check">
+			
+			</div></td><td width="20px"></td><td>
+			<button class="btn btn-danger btn-lg p-lg-12 fw-bolder" type="submit">Login</button>
+			</td>
+		</tr>
+		</table>
+	</form>
+	<br><br><br>
+	
+{% endblock %}
+
