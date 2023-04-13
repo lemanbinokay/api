@@ -31,6 +31,4 @@ docker run -d -p 5001:5000 lemanbinokay/api
 | POST | http://127.0.0.1:5000/referenceInterval/ | Reference interval estimation |
 | POST | http://127.0.0.1:5000/referenceIntervalResults/ | Reference interval estimation results for selected sample id and selected pathway in HTML format |
 | POST | http://127.0.0.1:5000/refiner/pdf/ | Reference interval estimation results for selected sample id and selected pathway in PDF format|
-| POST | http://127.0.0.1:5000/referenceIntervalResults/json/| Reference interval estimation results for selected sample id and selected pathway in JSON format
-
- |
+| POST | http://127.0.0.1:5000/referenceIntervalResults/json/| Reference interval estimation results for selected sample id and selected pathway in JSON format|
