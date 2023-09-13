@@ -1,5 +1,5 @@
 # A Restful API for Reference Interval Estimation in Metagenome Data
-With the help of the API, the reference intervals of the functional abundance of the gut microbiota can be estimated across multiple metabolic pathways.
+The Reference Interval Estimation API allows you to estimate the reference intervals of the functional abundance of gut microbiota across multiple metabolic pathways. This API provides various endpoints to interact with the data and obtain reference interval estimates. Below are the details for installation and usage of the API.
 
 ## Installation:
 
@@ -32,3 +32,6 @@ docker run -d -p 5001:5000 lemanbinokay/api
 | POST | http://127.0.0.1:5000/referenceIntervalResults/ | Reference interval estimation results for selected sample id and selected pathway in HTML format |
 | POST | http://127.0.0.1:5000/refiner/pdf/ | Reference interval estimation results for selected sample id and selected pathway in PDF format|
 | POST | http://127.0.0.1:5000/referenceIntervalResults/json/| Reference interval estimation results for selected sample id and selected pathway in JSON format|
+
+## Usage
+You can make HTTP requests to the specified endpoints using appropriate methods (GET or POST) to interact with the API and perform actions such as listing pathways, estimating reference intervals, and managing pathway abundance data. Please note that you need to replace http://127.0.0.1:5000/ with the actual URL where your API is hosted if it's not running locally. For detailed information on the request and response formats for each endpoint, refer to the API documentation and consider providing usage examples and sample payloads for better clarity. For further assistance or inquiries, please contact the API administrator.
