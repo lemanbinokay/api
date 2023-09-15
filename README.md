@@ -36,7 +36,7 @@ Before using this API, ensure that you have the following prerequisites installe
 If Nextflow is not installed, you can set up a Conda environment as follows:
 
 ```
-conda create --name nextflow_stable python=3.8
+conda create --name python=3.8
 conda activate name
 conda install -c bioconda nextflow
 ```
