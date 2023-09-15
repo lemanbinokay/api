@@ -1,7 +1,9 @@
 # A Restful API for Reference Interval Estimation in Metagenome Data
-Welcome to the documentation for our RESTful API. The Reference Interval Estimation API allows you to estimate the reference intervals of the functional abundance of gut microbiota across multiple metabolic pathways. This API provides various endpoints to interact with the data and obtain reference interval estimates. Below are the details for installation and usage of the API.
+Welcome to the documentation for our RESTful API. The application programming interface (API) was developed using the open-source Python programming language and the Flask framework as the software development platform. Any operating system can be selected as the server, and it is recommended to choose a Linux-based operating system.
 
-The application programming interface (API) was developed using the open-source Python programming language and the Flask framework as the software development platform. Any operating system can be selected as the server, and it is recommended to choose a Linux-based operating system.
+The Reference Interval Estimation API allows you to estimate the reference intervals of the functional abundance of gut microbiota across multiple metabolic pathways. This API provides various endpoints to interact with the data and obtain reference interval estimates. 
+
+Below are the details for installation and usage of the API.
 
 ## Installation:
 
@@ -62,7 +64,6 @@ After running nf-core/ampliseq, you need to run PICRUSt2 using the following com
 pathway_pipeline.py -i /path/to/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz \
     -o /path/to/picrust2_results \
     -m /path/to/database.txt \
-    -p 1 --no_regroup --coverage --skip_minpath
 ```
 
 PICRUSt2 is a tool for predicting functional abundances of microbiota pathways based on KEGG databases. The database.txt file contains KEGG pathway IDs related to the selected pathways.
@@ -97,8 +98,56 @@ The API facilitates data retrieval in JSON format through the "JSON Output" butt
 
 You can make HTTP requests to the specified endpoints using appropriate methods (GET or POST) to interact with the API and perform actions such as listing pathways, estimating reference intervals, and managing pathway abundance data. Please note that you need to replace http://127.0.0.1:5000/ with the actual URL where your API is hosted if it's not running locally. For further assistance or inquiries, please contact the API administrator.
 
-## Conclusion
 
+## Tutorial
+In this tutorial, you will be guided through the process of downloading and analyzing 16S rRNA sequencing data from samples obtained from a universal stool bank.
+
+### Downloading 16S rRNA Raw Data
+The raw 16S rRNA sequencing data will be downloaded from the universal stool bank donors. This data will serve as the input for subsequent analysis. This file can be downloaded from https://www.ebi.ac.uk/ena/browser/view/PRJEB41316.
+
+```
+bash ena-file-download-read_run-PRJEB41316-fastq_ftp-20230913-1107.sh
+```
+
+### Running nf-core/ampliseq for Microbiome Analysis
+The nf-core/ampliseq pipeline will be executed using the downloaded raw data for microbiome analysis. Run the nf-core/ampliseq pipeline with the following command:
+
+```
+nextflow run nf-core/ampliseq \
+    -r 2.3.2 \
+    -profile docker \
+    --input "data" \
+    --skip_cutadapt \
+    --extension "/*_{1,2}.fastq.gz" \
+    --skip_qiime \
+    --picrust \
+    --concatenate_reads \
+    --dada_ref_taxonomy 'rdp'  \
+    --skip_fastqc \
+    --skip_dada_addspecies \
+    --outdir "ampliseq_outputs"
+```
+    
+### Running PICRUSt2 for Functional Abundance Analysis
+PICRUSt2 will be run for the prediction of functional abundances of microbiota pathways based on KEGG databases. This analysis will be conducted using the pre-processed data.
+You need to run PICRUSt2 using the following command to analyze functional abundances:
+
+```
+pathway_pipeline.py -i /path/to/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz \
+    -o /path/to/picrust2_results \
+    -m /path/to/database.txt \
+    -p 1 --no_regroup --coverage --skip_minpath
+```    
+
+### Uploading Functional Abundance Data to the API
+The generated functional abundance data will be uploaded to the API. Note: Users should edit the data according to the sample file and then upload it.
+
+### Estimating Reference Intervals
+The API will be employed to estimate reference intervals based on the functional abundance data that has been passively uploaded.
+
+This tutorial provides a comprehensive overview of the entire process, enabling you to successfully download, pre-analyze, upload, and estimate reference intervals for 16S rRNA sequencing data from universal stool bank donors.
+
+## Conclusion
 In conclusion, the Reference Interval Estimation API for Metagenome Data provides a powerful tool for researchers and analysts working with gut microbiota functional abundance data. This API, built using Python and Flask, offers a range of endpoints to assist in data preparation, analysis, and visualization. Before using the API, it's essential to ensure that you have the necessary prerequisites installed, such as Nextflow, Conda, Docker, and Python, depending on your specific analysis needs. The API's key features include data upload and management, pathway abundance browsing, and the estimation of reference intervals. Users can conveniently upload their data in CSV format, explore pathway abundances, and estimate reference intervals for selected pathways and samples. The API endpoints are well-documented, with clear descriptions of their functionality, HTTP methods, and URL paths. Users can interact with the API by making HTTP requests to the appropriate endpoints, allowing them to integrate this functionality into their workflows seamlessly. 
 
 If you have any questions, require assistance, or need further information, don't hesitate to contact the API administrator for support. This API opens up exciting possibilities for researchers to gain insights into the functional abundance of gut microbiota and its relation to metabolic pathways, contributing to advances in microbiome research and personalized healthcare.
