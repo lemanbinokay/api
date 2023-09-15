@@ -71,7 +71,7 @@ PICRUSt2 is a tool for predicting functional abundances of microbiota pathways b
 After running PICRUSt2, you will have a functional abundance file that represents the activity of selected pathways in the microbiome data. You can upload this file to our API to estimate reference intervals.
 
 ### Data Upload to API
-The API provides users with three versatile output formats: a web interface (HTML), JSON output for integration with other programs, and PDF output for end-user convenience. To easily incorporate data in CSV file format into the database, simply click the "Upload CSV" button on the "Upload New Data" page. Users can then upload the edited data in the specified file format using the "Sample File" button on the same page.
+To easily incorporate data in CSV file format into the database, simply click the "Upload CSV" button on the "Upload New Data" page. Users can then upload the edited data in the specified file format using the "Sample File" button on the same page.
 
 ### Browse Function
 The database encompasses functional abundance results from 57 individuals for 11 distinct pathways. Users have the flexibility to contribute data for these 11 pathways or opt for different pathways of their choice. For user convenience and quick access to desired data, the "Browse" page offers a comprehensive list of functional abundances based on the selected sample. Additionally, the "Browse" page allows users to cross-check pathway abundances against reference intervals for the chosen sample.
