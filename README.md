@@ -137,7 +137,53 @@ pathway_pipeline.py -i /path/to/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz
     -o /path/to/picrust2_results \
     -m /path/to/database.txt \
     -p 1 --no_regroup --coverage --skip_minpath
-```    
+```
+
+#### Generating Custom Database with KEGG KO IDs
+This Python script retrieves KEGG KO IDs associated with a list of KEGG pathway IDs and stores them in an output CSV file, which can be used to create a custom database.
+ids.txt: A text file containing a list of KEGG pathway IDs, one per line.
+output.csv: A CSV file containing a list of KEGG KO IDs associated with the provided pathway IDs. The file uses a semicolon (;) as the separator and does not include a header row.
+
+```
+python3 parseurl.py ids.txt
+
+```
+
+The script (parseurl.py) takes an input file path as a command-line argument, which contains a list of KEGG pathway IDs.It then reads the file line by line to obtain the KEGG pathway IDs. For each pathway ID, it constructs a URL to retrieve information on the KEGG Orthology (KO) IDs associated with that pathway using the KEGG REST API. It fetches data from the URL and reads it as a CSV file with tab-separated values. It extracts the KO IDs from the second column of the CSV data, removes the 'ko:' prefix, and stores them in a Pandas DataFrame. The script concatenates the data from each pathway into a single data frame. Finally, it writes the collected KO IDs to an output CSV file named 'output.csv' with a semicolon (;) separator and no header.
+
+```
+# execute command:
+# python3 parseurl.py ids.txt 
+
+import sys
+import pandas as pd
+
+#print(sys.argv[1])
+koId_path = sys.argv[1]
+
+# Using readlines()
+file1 = open(koId_path , 'r')
+Lines = file1.readlines()
+baseurl = "http://rest.kegg.jp/link/ko/"
+count = 0
+df_all = pd.DataFrame()
+# Strips the newline character
+for line in Lines:
+    #print(line.strip())
+    url= baseurl+ line
+    data = pd.read_csv(url,header=None, sep='\t') # read data as csv getting from url
+    df = data[[1]].replace('ko:','',regex=True) # remove substring 'ko:'
+    #print(df.head())
+    if not df.empty:
+        df_all = pd.concat([df_all, df])
+    else:
+        df_all = df
+    
+
+
+#print(df_all.head())    
+df_all.to_csv('output.csv', index=False, sep=';', header=False) # write ids to csv file
+```
 
 ### Uploading Functional Abundance Data to the API
 The generated functional abundance data will be uploaded to the API. Note: Users should edit the data according to the sample file and then upload it.
