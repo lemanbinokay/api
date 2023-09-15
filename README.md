@@ -55,7 +55,7 @@ nextflow run nf-core/ampliseq \
     --picrust \
     --outdir "ampliseq_outputs"
 ```
-You can modify this code as you wish, but make sure to use the --picrust parameter. If you need more assistance with the Nextflow installation, please visit this page: https://nf-co.re/ampliseq/2.6.1/docs/usage/.
+You can modify this code as you wish, but make sure to use the --picrust parameter. If you need more assistance with the nf-core/ampliseq pipeline, please visit this page: https://nf-co.re/ampliseq/2.6.1/docs/usage/.
 
 #### Running PICRUSt2
 After running nf-core/ampliseq, you need to run PICRUSt2 using the following command to analyze functional abundances:
@@ -66,7 +66,7 @@ pathway_pipeline.py -i /path/to/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz
     -m /path/to/database.txt \
 ```
 
-PICRUSt2 is a tool for predicting functional abundances of microbiota pathways based on KEGG databases. The database.txt file contains KEGG pathway IDs related to the selected pathways.
+PICRUSt2 is a tool for predicting functional abundances of microbiota pathways based on KEGG databases. The database.txt file contains KEGG pathway IDs related to the selected pathways. You can modify this code as you wish. If you need more assistance with the picrust2 tool, please visit this page: https://github.com/picrust/picrust2/wiki.
 After running PICRUSt2, you will have a functional abundance file that represents the activity of selected pathways in the microbiome data. You can upload this file to our API to estimate reference intervals.
 
 ### Data Upload to API
@@ -141,8 +141,8 @@ pathway_pipeline.py -i /path/to/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz
 
 #### Generating Custom Database with KEGG KO IDs
 This Python script retrieves KEGG KO IDs associated with a list of KEGG pathway IDs and stores them in an output CSV file, which can be used to create a custom database.
-ids.txt: A text file containing a list of KEGG pathway IDs, one per line.
-output.csv: A CSV file containing a list of KEGG KO IDs associated with the provided pathway IDs. The file uses a semicolon (;) as the separator and does not include a header row.
+- ids.txt: A text file containing a list of KEGG pathway IDs, one per line.
+- output.csv: A CSV file containing a list of KEGG KO IDs associated with the provided pathway IDs. The file uses a semicolon (;) as the separator and does not include a header row.
 
 ```
 python3 parseurl.py ids.txt
