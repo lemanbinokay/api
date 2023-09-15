@@ -146,7 +146,6 @@ output.csv: A CSV file containing a list of KEGG KO IDs associated with the prov
 
 ```
 python3 parseurl.py ids.txt
-
 ```
 
 The script (parseurl.py) takes an input file path as a command-line argument, which contains a list of KEGG pathway IDs.It then reads the file line by line to obtain the KEGG pathway IDs. For each pathway ID, it constructs a URL to retrieve information on the KEGG Orthology (KO) IDs associated with that pathway using the KEGG REST API. It fetches data from the URL and reads it as a CSV file with tab-separated values. It extracts the KO IDs from the second column of the CSV data, removes the 'ko:' prefix, and stores them in a Pandas DataFrame. The script concatenates the data from each pathway into a single data frame. Finally, it writes the collected KO IDs to an output CSV file named 'output.csv' with a semicolon (;) separator and no header.
