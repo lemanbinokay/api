@@ -27,10 +27,10 @@ To access the functions of the API, registration is required. Clicking on the "R
 
 Before using this API, ensure that you have the following prerequisites installed on your system:
 
-1- Nextflow (If not installed, you can set up a Conda environment as described below)
-2- Conda
-3- Docker (for nf-core/ampliseq)
-4- Python (for PICRUSt2)
+1. Nextflow (If not installed, you can set up a Conda environment as described below)
+2. Conda
+3. Docker (for nf-core/ampliseq)
+4. Python (for PICRUSt2)
 
 #### Conda Environment Setup (for Nextflow)
 If Nextflow is not installed, you can set up a Conda environment as follows:
