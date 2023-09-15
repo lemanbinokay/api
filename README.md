@@ -67,6 +67,7 @@ pathway_pipeline.py -i /path/to/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz
 ```
 
 PICRUSt2 is a tool for predicting functional abundances of microbiota pathways based on KEGG databases. The database.txt file contains KEGG pathway IDs related to the selected pathways. You can modify this code as you wish. If you need more assistance with the picrust2 tool, please visit this page: https://github.com/picrust/picrust2/wiki.
+
 After running PICRUSt2, you will have a functional abundance file that represents the activity of selected pathways in the microbiome data. You can upload this file to our API to estimate reference intervals.
 
 ### Data Upload to API
