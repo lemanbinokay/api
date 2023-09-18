@@ -36,11 +36,19 @@ Before using this API, ensure that you have the following prerequisites installe
 If Nextflow is not installed, you can set up a Conda environment as follows:
 
 ```
-conda create --name python=3.8
-conda activate name
+conda create --name nextflow python=3.8
+conda activate nextflow
 conda install -c bioconda nextflow
 ```
 If you need more assistance with the Nextflow installation, please visit this page: https://nf-co.re/docs/usage/installation.
+
+If Picrust2 is not installed, you can set up a Conda environment as follows:
+
+```
+mamba create -n picrust2 -c bioconda -c conda-forge picrust2=2.5.2
+conda activate picrust2
+```
+If you need more assistance with the Nextflow installation, please visit this page: **https://nf-co.re/docs/usage/installation.
 
 #### Microbiome Analysis with nf-core/ampliseq
 Run the nf-core/ampliseq pipeline with the following command:
@@ -118,15 +126,20 @@ nextflow run nf-core/ampliseq \
     -r 2.3.2 \
     -profile docker \
     --input "data" \
-    --skip_cutadapt \
     --extension "/*_{1,2}.fastq.gz" \
-    --skip_qiime \
     --picrust \
-    --concatenate_reads \
-    --dada_ref_taxonomy 'rdp'  \
+    --skip_cutadapt \
+    --skip_qiime \
+    --skip_dada_barrnap \
+    --skip_dada_taxonomy \
+    --skip_barplot \
+    --skip_alpha_rarefraction \
+    --skip_diversity_indices \
     --skip_fastqc \
+    --skip_ancom \
     --skip_dada_addspecies \
     --outdir "ampliseq_outputs"
+
 ```
     
 ### Running PICRUSt2 for Functional Abundance Analysis
