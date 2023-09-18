@@ -1,0 +1,2 @@
+assignTaxonomy	minBoot = 50
+seed	100

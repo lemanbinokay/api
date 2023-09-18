@@ -1,0 +1,398 @@
+<!--
+  ~ Copyright 2013-2023, Seqera Labs
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+
+    <head>
+        <title>Nextflow Cytoscape.js with Dagre</title>
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+        <script type="text/javascript">
+        var prot = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cscript src='" + prot + "code.jquery.com/jquery-2.0.3.min.js' type='text/javascript' %3E%3C/script%3E"));
+        document.write(unescape("%3Cscript src='" + prot + "cdnjs.cloudflare.com/ajax/libs/cytoscape/2.6.12/cytoscape.min.js' type='text/javascript' %3E%3C/script%3E"));
+        document.write(unescape("%3Cscript src='" + prot + "cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js' type='text/javascript' %3E%3C/script%3E"));
+        document.write(unescape("%3Cscript src='" + prot + "cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js' type='text/javascript' %3E%3C/script%3E"));
+        </script>
+
+        <style>
+            body {
+                font-family: helvetica;
+                font-size: 14px;
+            }
+
+            #cy {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 999;
+            }
+
+            h1 {
+                opacity: 0.5;
+                font-size: 1em;
+            }
+        </style>
+
+        <script>
+            $(function(){
+                var cy = window.cy = cytoscape({
+                    container: document.getElementById('cy'),
+                    boxSelectionEnabled: false,
+                    autounselectify: true,
+
+                    layout: {
+                        name: 'dagre'
+                    },
+
+                    style: cytoscape.stylesheet()
+                        .selector( 'node')
+                            .css({
+                                'width': 10,
+                                'height': 10,
+                                'content': 'data(label)',
+                                'text-valign': 'center',
+                                'text-halign': 'center',
+                                'text-opacity': 0.5,
+                            })
+                        .selector('node.PROCESS')
+                            .css({
+                                'width': 100,
+                                'height': 50,
+                                'text-opacity': 0.9,
+                                'background-color': '#009911'
+                            })
+                        .selector('node.OPERATOR')
+                            .css({
+                                'background-color': '#11479e',
+                                'text-halign': 'right',
+                            })
+                        .selector('node.ORIGIN')
+                            .css({
+                                'background-color': '#999999',
+                                'text-halign': 'right',
+                            })
+                        .selector('node.TERMINATION')
+                            .css({
+                                'background-color': '#999999',
+                                'text-halign': 'right',
+                            })
+                        .selector('edge')
+                            .css({
+                                'content': 'data(label)',
+                                'text-opacity': 0.5,
+                                'width': 4,
+                                'target-arrow-shape': 'triangle',
+                                'line-color': '#9dbaea',
+                                'target-arrow-color': '#9dbaea'
+                            }),
+
+elements: {
+nodes: [
+{ data: { id: 'p0', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p1', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p2'}, classes: 'NODE' },
+{ data: { id: 'p3', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p4'}, classes: 'NODE' },
+{ data: { id: 'p5', label: 'Channel.fromList'}, classes: 'ORIGIN' },
+{ data: { id: 'p6', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p7', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p8'}, classes: 'NODE' },
+{ data: { id: 'p9', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p10', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p11'}, classes: 'NODE' },
+{ data: { id: 'p12', label: 'Channel.fromFilePairs'}, classes: 'ORIGIN' },
+{ data: { id: 'p13', label: 'ifEmpty'}, classes: 'OPERATOR' },
+{ data: { id: 'p14', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p15', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p16', label: 'toList'}, classes: 'OPERATOR' },
+{ data: { id: 'p17', label: 'subscribe'}, classes: 'OPERATOR' },
+{ data: { id: 'p18', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p19', label: 'subscribe'}, classes: 'OPERATOR' },
+{ data: { id: 'p20', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p21', label: 'subscribe'}, classes: 'OPERATOR' },
+{ data: { id: 'p22', label: 'branch'}, classes: 'OPERATOR' },
+{ data: { id: 'p23', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p24', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p25', label: 'subscribe'}, classes: 'OPERATOR' },
+{ data: { id: 'p26', label: 'NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES'}, classes: 'PROCESS' },
+{ data: { id: 'p27', label: 'first'}, classes: 'OPERATOR' },
+{ data: { id: 'p28', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p29', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p30', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p31', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p32', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p33', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p34', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p35', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p36', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_QUALITY'}, classes: 'PROCESS' },
+{ data: { id: 'p37'}, classes: 'NODE' },
+{ data: { id: 'p38'}, classes: 'NODE' },
+{ data: { id: 'p39'}, classes: 'NODE' },
+{ data: { id: 'p40', label: 'subscribe'}, classes: 'OPERATOR' },
+{ data: { id: 'p41', label: 'NFCORE_AMPLISEQ:AMPLISEQ:TRUNCLEN'}, classes: 'PROCESS' },
+{ data: { id: 'p42', label: 'toSortedList'}, classes: 'OPERATOR' },
+{ data: { id: 'p43', label: 'first'}, classes: 'OPERATOR' },
+{ data: { id: 'p44', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p45', label: 'subscribe'}, classes: 'OPERATOR' },
+{ data: { id: 'p46', label: 'combine'}, classes: 'OPERATOR' },
+{ data: { id: 'p47', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_FILTNTRIM'}, classes: 'PROCESS' },
+{ data: { id: 'p48'}, classes: 'NODE' },
+{ data: { id: 'p49'}, classes: 'NODE' },
+{ data: { id: 'p50', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p51', label: 'groupTuple'}, classes: 'OPERATOR' },
+{ data: { id: 'p52', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p53', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_ERR'}, classes: 'PROCESS' },
+{ data: { id: 'p54'}, classes: 'NODE' },
+{ data: { id: 'p55'}, classes: 'NODE' },
+{ data: { id: 'p56'}, classes: 'NODE' },
+{ data: { id: 'p57'}, classes: 'NODE' },
+{ data: { id: 'p58'}, classes: 'NODE' },
+{ data: { id: 'p59', label: 'join'}, classes: 'OPERATOR' },
+{ data: { id: 'p60', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_DENOISING'}, classes: 'PROCESS' },
+{ data: { id: 'p61'}, classes: 'NODE' },
+{ data: { id: 'p62'}, classes: 'NODE' },
+{ data: { id: 'p63', label: 'first'}, classes: 'OPERATOR' },
+{ data: { id: 'p64', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p65', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_RMCHIMERA'}, classes: 'PROCESS' },
+{ data: { id: 'p66'}, classes: 'NODE' },
+{ data: { id: 'p67'}, classes: 'NODE' },
+{ data: { id: 'p68', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p69', label: 'groupTuple'}, classes: 'OPERATOR' },
+{ data: { id: 'p70', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p71', label: 'join'}, classes: 'OPERATOR' },
+{ data: { id: 'p72', label: 'join'}, classes: 'OPERATOR' },
+{ data: { id: 'p73', label: 'join'}, classes: 'OPERATOR' },
+{ data: { id: 'p74', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_STATS'}, classes: 'PROCESS' },
+{ data: { id: 'p75'}, classes: 'NODE' },
+{ data: { id: 'p76', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p77', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p78', label: 'map'}, classes: 'OPERATOR' },
+{ data: { id: 'p79', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p80', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_MERGE'}, classes: 'PROCESS' },
+{ data: { id: 'p81'}, classes: 'NODE' },
+{ data: { id: 'p82'}, classes: 'NODE' },
+{ data: { id: 'p83'}, classes: 'NODE' },
+{ data: { id: 'p84'}, classes: 'NODE' },
+{ data: { id: 'p85', label: 'NFCORE_AMPLISEQ:AMPLISEQ:BARRNAP'}, classes: 'PROCESS' },
+{ data: { id: 'p86'}, classes: 'NODE' },
+{ data: { id: 'p87'}, classes: 'NODE' },
+{ data: { id: 'p88', label: 'ifEmpty'}, classes: 'OPERATOR' },
+{ data: { id: 'p89', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p90', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p91', label: 'NFCORE_AMPLISEQ:AMPLISEQ:FORMAT_TAXONOMY'}, classes: 'PROCESS' },
+{ data: { id: 'p92'}, classes: 'NODE' },
+{ data: { id: 'p93'}, classes: 'NODE' },
+{ data: { id: 'p94'}, classes: 'ORIGIN' },
+{ data: { id: 'p95', label: 'NFCORE_AMPLISEQ:AMPLISEQ:DADA2_TAXONOMY'}, classes: 'PROCESS' },
+{ data: { id: 'p96'}, classes: 'NODE' },
+{ data: { id: 'p97'}, classes: 'NODE' },
+{ data: { id: 'p98'}, classes: 'NODE' },
+{ data: { id: 'p99'}, classes: 'NODE' },
+{ data: { id: 'p100'}, classes: 'ORIGIN' },
+{ data: { id: 'p101'}, classes: 'ORIGIN' },
+{ data: { id: 'p102', label: 'NFCORE_AMPLISEQ:AMPLISEQ:PICRUST'}, classes: 'PROCESS' },
+{ data: { id: 'p103'}, classes: 'NODE' },
+{ data: { id: 'p104'}, classes: 'NODE' },
+{ data: { id: 'p105'}, classes: 'NODE' },
+{ data: { id: 'p106'}, classes: 'NODE' },
+{ data: { id: 'p107', label: 'ifEmpty'}, classes: 'OPERATOR' },
+{ data: { id: 'p108', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p109', label: 'unique'}, classes: 'OPERATOR' },
+{ data: { id: 'p110', label: 'collectFile'}, classes: 'OPERATOR' },
+{ data: { id: 'p111', label: 'NFCORE_AMPLISEQ:AMPLISEQ:CUSTOM_DUMPSOFTWAREVERSIONS'}, classes: 'PROCESS' },
+{ data: { id: 'p112'}, classes: 'NODE' },
+{ data: { id: 'p113'}, classes: 'NODE' },
+{ data: { id: 'p114', label: 'Channel.empty'}, classes: 'ORIGIN' },
+{ data: { id: 'p115', label: 'Channel.from'}, classes: 'ORIGIN' },
+{ data: { id: 'p116', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p117', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p118', label: 'ifEmpty'}, classes: 'OPERATOR' },
+{ data: { id: 'p119', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p120'}, classes: 'ORIGIN' },
+{ data: { id: 'p121', label: 'collectFile'}, classes: 'OPERATOR' },
+{ data: { id: 'p122', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p123', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p124', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p125', label: 'collect'}, classes: 'OPERATOR' },
+{ data: { id: 'p126', label: 'NFCORE_AMPLISEQ:AMPLISEQ:MULTIQC'}, classes: 'PROCESS' },
+{ data: { id: 'p127'}, classes: 'NODE' },
+{ data: { id: 'p128'}, classes: 'NODE' },
+{ data: { id: 'p129', label: 'toList'}, classes: 'OPERATOR' },
+{ data: { id: 'p130'}, classes: 'NODE' },
+{ data: { id: 'p131', label: 'mix'}, classes: 'OPERATOR' },
+{ data: { id: 'p132'}, classes: 'NODE' },
+],
+edges: [
+{ data: { source: 'p0', target: 'p117', label: 'ch_multiqc_custom_config' } },
+{ data: { source: 'p1', target: 'p2', label: 'ch_metadata' } },
+{ data: { source: 'p3', target: 'p4', label: 'ch_qiime_classifier' } },
+{ data: { source: 'p5', target: 'p6'} },
+{ data: { source: 'p6', target: 'p90', label: 'ch_dada_ref_taxonomy' } },
+{ data: { source: 'p7', target: 'p8', label: 'ch_qiime_ref_taxonomy' } },
+{ data: { source: 'p9', target: 'p28', label: 'ch_versions' } },
+{ data: { source: 'p10', target: 'p11', label: 'ch_fasta' } },
+{ data: { source: 'p12', target: 'p13'} },
+{ data: { source: 'p13', target: 'p14'} },
+{ data: { source: 'p14', target: 'p15', label: 'ch_reads' } },
+{ data: { source: 'p15', target: 'p16'} },
+{ data: { source: 'p16', target: 'p17'} },
+{ data: { source: 'p14', target: 'p18', label: 'ch_reads' } },
+{ data: { source: 'p18', target: 'p19'} },
+{ data: { source: 'p14', target: 'p20', label: 'ch_reads' } },
+{ data: { source: 'p20', target: 'p21'} },
+{ data: { source: 'p14', target: 'p22', label: 'ch_reads' } },
+{ data: { source: 'p22', target: 'p23'} },
+{ data: { source: 'p22', target: 'p26', label: 'ch_reads' } },
+{ data: { source: 'p23', target: 'p24'} },
+{ data: { source: 'p24', target: 'p25'} },
+{ data: { source: 'p26', target: 'p29', label: 'ch_trimmed_reads' } },
+{ data: { source: 'p26', target: 'p27'} },
+{ data: { source: 'p27', target: 'p28'} },
+{ data: { source: 'p28', target: 'p44', label: 'ch_versions' } },
+{ data: { source: 'p29', target: 'p30'} },
+{ data: { source: 'p30', target: 'p31'} },
+{ data: { source: 'p31', target: 'p35', label: 'ch_all_trimmed_fw' } },
+{ data: { source: 'p26', target: 'p32', label: 'ch_trimmed_reads' } },
+{ data: { source: 'p32', target: 'p33'} },
+{ data: { source: 'p33', target: 'p34'} },
+{ data: { source: 'p34', target: 'p35', label: 'ch_all_trimmed_rv' } },
+{ data: { source: 'p35', target: 'p36', label: 'ch_all_trimmed_reads' } },
+{ data: { source: 'p36', target: 'p39'} },
+{ data: { source: 'p36', target: 'p41'} },
+{ data: { source: 'p36', target: 'p38'} },
+{ data: { source: 'p36', target: 'p37'} },
+{ data: { source: 'p36', target: 'p40'} },
+{ data: { source: 'p41', target: 'p42'} },
+{ data: { source: 'p41', target: 'p43'} },
+{ data: { source: 'p42', target: 'p45', label: 'ch_trunc' } },
+{ data: { source: 'p43', target: 'p44'} },
+{ data: { source: 'p44', target: 'p64', label: 'ch_versions' } },
+{ data: { source: 'p26', target: 'p46', label: 'ch_trimmed_reads' } },
+{ data: { source: 'p42', target: 'p46', label: 'ch_trunc' } },
+{ data: { source: 'p46', target: 'p47', label: 'ch_trimmed_reads' } },
+{ data: { source: 'p47', target: 'p68'} },
+{ data: { source: 'p47', target: 'p50'} },
+{ data: { source: 'p47', target: 'p49'} },
+{ data: { source: 'p47', target: 'p48'} },
+{ data: { source: 'p50', target: 'p51'} },
+{ data: { source: 'p51', target: 'p52'} },
+{ data: { source: 'p52', target: 'p53', label: 'ch_filt_reads' } },
+{ data: { source: 'p53', target: 'p59'} },
+{ data: { source: 'p53', target: 'p58'} },
+{ data: { source: 'p53', target: 'p57'} },
+{ data: { source: 'p53', target: 'p56'} },
+{ data: { source: 'p53', target: 'p55'} },
+{ data: { source: 'p53', target: 'p54'} },
+{ data: { source: 'p52', target: 'p59', label: 'ch_filt_reads' } },
+{ data: { source: 'p59', target: 'p60', label: 'ch_derep_errormodel' } },
+{ data: { source: 'p60', target: 'p71'} },
+{ data: { source: 'p60', target: 'p65'} },
+{ data: { source: 'p60', target: 'p72'} },
+{ data: { source: 'p60', target: 'p62'} },
+{ data: { source: 'p60', target: 'p63'} },
+{ data: { source: 'p60', target: 'p61'} },
+{ data: { source: 'p63', target: 'p64'} },
+{ data: { source: 'p64', target: 'p89', label: 'ch_versions' } },
+{ data: { source: 'p65', target: 'p73'} },
+{ data: { source: 'p65', target: 'p67'} },
+{ data: { source: 'p65', target: 'p66'} },
+{ data: { source: 'p68', target: 'p69'} },
+{ data: { source: 'p69', target: 'p70'} },
+{ data: { source: 'p70', target: 'p71'} },
+{ data: { source: 'p71', target: 'p72'} },
+{ data: { source: 'p72', target: 'p73'} },
+{ data: { source: 'p73', target: 'p74', label: 'ch_track_numbers' } },
+{ data: { source: 'p74', target: 'p76'} },
+{ data: { source: 'p74', target: 'p75'} },
+{ data: { source: 'p76', target: 'p77'} },
+{ data: { source: 'p77', target: 'p80'} },
+{ data: { source: 'p65', target: 'p78'} },
+{ data: { source: 'p78', target: 'p79'} },
+{ data: { source: 'p79', target: 'p80'} },
+{ data: { source: 'p80', target: 'p84', label: 'ch_stats' } },
+{ data: { source: 'p80', target: 'p83'} },
+{ data: { source: 'p80', target: 'p102', label: 'ch_dada2_asv' } },
+{ data: { source: 'p80', target: 'p85', label: 'ch_fasta' } },
+{ data: { source: 'p80', target: 'p82'} },
+{ data: { source: 'p80', target: 'p81'} },
+{ data: { source: 'p85', target: 'p87'} },
+{ data: { source: 'p85', target: 'p86'} },
+{ data: { source: 'p85', target: 'p88'} },
+{ data: { source: 'p88', target: 'p89'} },
+{ data: { source: 'p89', target: 'p108', label: 'ch_versions' } },
+{ data: { source: 'p90', target: 'p91'} },
+{ data: { source: 'p91', target: 'p95', label: 'ch_assigntax' } },
+{ data: { source: 'p91', target: 'p93', label: 'ch_addspecies' } },
+{ data: { source: 'p91', target: 'p92'} },
+{ data: { source: 'p80', target: 'p95', label: 'ch_fasta' } },
+{ data: { source: 'p94', target: 'p95', label: 'outfile' } },
+{ data: { source: 'p95', target: 'p99', label: 'ch_dada2_tax' } },
+{ data: { source: 'p95', target: 'p98'} },
+{ data: { source: 'p95', target: 'p97'} },
+{ data: { source: 'p95', target: 'p96'} },
+{ data: { source: 'p80', target: 'p102', label: 'ch_fasta' } },
+{ data: { source: 'p100', target: 'p102', label: 'source' } },
+{ data: { source: 'p101', target: 'p102', label: 'message' } },
+{ data: { source: 'p102', target: 'p106'} },
+{ data: { source: 'p102', target: 'p105'} },
+{ data: { source: 'p102', target: 'p107'} },
+{ data: { source: 'p102', target: 'p104'} },
+{ data: { source: 'p102', target: 'p103'} },
+{ data: { source: 'p107', target: 'p108'} },
+{ data: { source: 'p108', target: 'p109', label: 'ch_versions' } },
+{ data: { source: 'p109', target: 'p110'} },
+{ data: { source: 'p110', target: 'p111'} },
+{ data: { source: 'p111', target: 'p113'} },
+{ data: { source: 'p111', target: 'p123'} },
+{ data: { source: 'p111', target: 'p112'} },
+{ data: { source: 'p114', target: 'p116', label: 'ch_multiqc_files' } },
+{ data: { source: 'p115', target: 'p116'} },
+{ data: { source: 'p116', target: 'p119', label: 'ch_multiqc_files' } },
+{ data: { source: 'p117', target: 'p118'} },
+{ data: { source: 'p118', target: 'p119'} },
+{ data: { source: 'p119', target: 'p122', label: 'ch_multiqc_files' } },
+{ data: { source: 'p120', target: 'p121', label: 'ch_workflow_summary' } },
+{ data: { source: 'p121', target: 'p122'} },
+{ data: { source: 'p122', target: 'p124', label: 'ch_multiqc_files' } },
+{ data: { source: 'p123', target: 'p124'} },
+{ data: { source: 'p124', target: 'p125', label: 'ch_multiqc_files' } },
+{ data: { source: 'p125', target: 'p126'} },
+{ data: { source: 'p126', target: 'p129'} },
+{ data: { source: 'p126', target: 'p128'} },
+{ data: { source: 'p126', target: 'p127'} },
+{ data: { source: 'p126', target: 'p131'} },
+{ data: { source: 'p129', target: 'p130'} },
+{ data: { source: 'p108', target: 'p131', label: 'ch_versions' } },
+{ data: { source: 'p131', target: 'p132', label: 'ch_versions' } },
+],
+},
+
+                });
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <h1>Nextflow Cytoscape.js with Dagre</h1>
+        <div id="cy"></div>
+    </body>
+
+</html>

@@ -1,0 +1,19 @@
+BARRNAP:
+  barrnap: '0.9'
+CUSTOM_DUMPSOFTWAREVERSIONS:
+  python: 3.9.5
+  yaml: 5.4.1
+DADA2_DENOISING:
+  R: 4.1.1
+  dada2: 1.22.0
+PICRUST:
+  picrust2: 2.4.2
+  python: 3.8.12
+RENAME_RAW_DATA_FILES:
+  sed: '4.7'
+TRUNCLEN:
+  pandas: 1.1.5
+  python: 3.9.1
+Workflow:
+  Nextflow: 23.04.3
+  nf-core/ampliseq: 2.3.2
