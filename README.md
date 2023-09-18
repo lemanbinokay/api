@@ -48,7 +48,7 @@ If Picrust2 is not installed, you can set up a Conda environment as follows:
 mamba create -n picrust2 -c bioconda -c conda-forge picrust2=2.5.2
 conda activate picrust2
 ```
-If you need more assistance with the Nextflow installation, please visit this page: **https://nf-co.re/docs/usage/installation.
+If you need more assistance with the Nextflow installation, please visit this page: https://nf-co.re/docs/usage/installation.
 
 #### Microbiome Analysis with nf-core/ampliseq
 Run the nf-core/ampliseq pipeline with the following command:
