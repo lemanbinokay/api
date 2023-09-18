@@ -109,8 +109,7 @@ You can make HTTP requests to the specified endpoints using appropriate methods 
 
 
 ## Tutorial
-In this tutorial, you will be guided through the process of downloading and analyzing 16S rRNA sequencing data from samples obtained from a universal stool bank.
-
+In this tutorial, you will be guided through the process of downloading and analyzing 16S rRNA sequencing data from samples obtained from a universal stool bank. Article link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7988957/
 ### Downloading 16S rRNA Raw Data
 The raw 16S rRNA sequencing data will be downloaded from the universal stool bank donors. This data will serve as the input for subsequent analysis. This file can be downloaded from https://www.ebi.ac.uk/ena/browser/view/PRJEB41316.
 
